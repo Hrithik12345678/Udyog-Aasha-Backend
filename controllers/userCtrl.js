@@ -1,5 +1,5 @@
 const Users = require("../models/userModel");
-const bcrypt = require("bcrypt");
+
 const jwt = require("jsonwebtoken");
 
 const userCtrl = {
@@ -30,7 +30,7 @@ const userCtrl = {
     try {
       const { fullname, age, gender, mobileno, email, password_repeat } =
         req.body;
-      const passwordHash = await bcrypt.hash(password_repeat, 12);
+     
 
       const newUser = new Users({
         fullname,
@@ -38,7 +38,7 @@ const userCtrl = {
         gender,
         mobileno,
         email,
-        password_repeat: passwordHash,
+        password_repeat,
       });
       newUser.save();
 
